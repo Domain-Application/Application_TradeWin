@@ -1,0 +1,3 @@
+Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa;Initial Catalog=tradewin2;Data Source=jack-pc\sql;
+
+

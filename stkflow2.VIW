@@ -1,0 +1,13 @@
+--Start of file
+
+@date1
+please key in data of statement
+Statement date:
+
+drop view [REP_PSTKREP]
+
+create view [REP_PSTKREP] as
+select * from stkflow
+where date<=@date1
+
+--End of file

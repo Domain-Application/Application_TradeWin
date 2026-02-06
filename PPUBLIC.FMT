@@ -1,0 +1,24 @@
+                         E-1PUBLIC WEIGHING-0F
+FROM: E@NAMEF              R/N NO: E@TICKETF
+      E@ADD1F                DATE: E@DATEF
+      E@ADD2F          VEHICLE NO: E@VEHICLEF
+      E@ADD3F              GRN NO: E@DOF
+SUBCON      : @SUBCON          PAY TYPE: E@PTYPEF
+TRANSPORTER : @TNAME       PAGE : 1 of 1F
+REMARKS     : @REMARKS
+GRADE BY    : @GRNAME
+TIME IN     : @TIMEIN   TIME OUT : @TIMEOUT
+GROSS       : @SGROSS     TARE : @STARE   WASTAGE : @WASTAGE   NETT WT. :@SNETM
++-----+------+---------------------------------------------------+-------+---------+----------+
+|ITEM | CODE | DESCRIPTION                                       | QTY   | U/PRICE | AMOUNT   |
++-----+------+---------------------------------------------------+-------+---------+----------+
+| 1   |      | @PRODUCT|@SNET |         |@AMOUNT |
++-----+------+---------------------------------------------------+-------+---------+----------+
+                                               Total :                              @AMOUNT
+
+
+P
+......................      ........................     .....................
+@DRIVER RECEIVED BY                 WEIGHED BY
+I/C NO:@ICNO
+

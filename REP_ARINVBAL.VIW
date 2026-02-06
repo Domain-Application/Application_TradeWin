@@ -1,0 +1,39 @@
+--START FILE
+
+@date1
+please key in data of statement
+Statement date:
+
+DROP view rep_arinvbal 
+
+CREATE view rep_arinvbal as
+select a.refno, a.idate as date, a.debtor, sum(a.subamt) as bal from (
+select refno,date as idate,date,debtor, (amount -
+isnull((select sum(total) from arpaydat where refno = aripay.refno and arpaydat.date <= @date1) ,0) ) * -1 as subamt
+ from aripay
+where amount <> isnull((select sum(total) from arpaydat where refno = aripay.refno  and arpaydat.date <= @date1),0)
+and aripay.date <= @date1
+union all
+select refno,date,date,debtor, (amount -
+isnull((select sum(total) from arcrdat where refno = arcr.refno and arcrdat.date <= @date1) ,0) )* -1 as subamt
+ from arcr
+where amount <> isnull((select sum(total) from arcrdat where refno = arcr.refno  and arcrdat.date <= @date1),0)
+and arcr.date <= @date1
+union all
+select refno, date, date, debtor, amount
+from arinv
+where date <= @date1
+union all
+select b.invoice, a.date, b.date, a.debtor, b.total * -1 as amount
+from arpaydat b inner join arinv a on a.refno = b.invoice
+where b.date <= @date1
+union all
+select b.invoice, a.date, b.date, a.debtor, b.total * -1 as amount
+from arcrdat b inner join arinv a on a.refno = b.invoice
+where b.date <= @date1 ) a
+group by a.refno, a.idate, a.debtor
+
+
+
+
+--End of file

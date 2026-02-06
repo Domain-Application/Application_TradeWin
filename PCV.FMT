@@ -1,0 +1,32 @@
+Pt
+E%Title%F
+%Add1%
+%Add2%
+%Add3%
+
+
+
+                       E-1PAYMENT VOUCHER-0F
+
+
+                                                  VOUCHER NO : E@REFNOF
+                                                        DATE : E@DATEF
+                                                   CHEQUE NO : E@CHEQUEF
+P
+PARTICULAR: E@PARTICULARF
+REMARKS   : E@REMARKSE
+
+  CODE        DESCRIPTION                                           AMOUNT (RM)F°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+  @GLCODE      @GLNAME         @AMT
+
+
+%CashAmt%
+
+
+
+
+
+M
+_______________________      _____________________________       _____________________________
+PREPARED BY                  APPROVED BY                         RECEIVED BY
+%User%P

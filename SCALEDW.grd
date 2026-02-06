@@ -1,0 +1,4 @@
+MGRID g(&m_grid,sub,0,3);
+g.SetTitle("No",420,7);
+g.SetTitle("Ticket",1185,1);
+g.SetTitle("Serial",1185,1);

@@ -1,0 +1,11 @@
+--Strat of file
+
+##
+
+ALTER VIEW [REP_INCENTIVE] AS
+SELECT     dbo.DP.ACCODE, SUM(ABS(ISNULL(dbo.DP.SGROSS, 0) - ISNULL(dbo.DP.STARE, 0)) - ISNULL(dbo.DP.WASTAGE, 0)) AS net, dbo.ACCODE.ACTYPE, dbo.GetIncentivePercent(@two1, @two2, dbo.ACCODE.ACTYPE, SUM(ABS(ISNULL(dbo.DP.SGROSS, 0) - ISNULL(dbo.DP.STARE, 0)) - ISNULL(dbo.DP.WASTAGE, 0))) AS IncentivePercent, dbo.GetIncentivePrice(@two1, @two2, dbo.ACCODE.ACTYPE, SUM(ABS(ISNULL(dbo.DP.SGROSS, 0) - ISNULL(dbo.DP.STARE, 0)) - ISNULL(dbo.DP.WASTAGE, 0))) AS IncentivePrice, dbo.GetIncentiveQty(@two1,@two2, dbo.ACCODE.ACTYPE, SUM(ABS(ISNULL(dbo.DP.SGROSS, 0) - ISNULL(dbo.DP.STARE, 0)) - ISNULL(dbo.DP.WASTAGE, 0))) AS IncentiveQty
+FROM dbo.DP INNER JOIN dbo.ACCODE ON dbo.DP.ACCODE = dbo.ACCODE.CODENO
+WHERE     (dbo.DP.[DATE] >= @two1) AND (dbo.DP.[DATE] <= @two2)
+GROUP BY dbo.DP.ACCODE, dbo.ACCODE.ACTYPE
+
+--End of file

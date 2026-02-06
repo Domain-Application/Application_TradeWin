@@ -1,0 +1,10 @@
+--START
+
+@date1
+please key in data of statement
+Statement date:
+
+CREATW VIEW [AAA] AS
+SELECT * FROM GLGROUP
+
+--END FILE

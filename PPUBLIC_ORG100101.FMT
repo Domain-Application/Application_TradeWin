@@ -1,0 +1,28 @@
+                       E-1DELIVERY INVOICE-0F
+TO:   E@NAMEF
+      E@ADD1F       DATE: E@DATEF
+      E@ADD2F VEHICLE NO: E@VEHICLEF
+      E@ADD3F
+
+
+PRODUCT     : @PRODUCT
+
+REMARKS     : @REMARKS
+
++----------+-----------+
+|   TIME   | WEIGHT(KG)|
++----------+-----------+
+| @TIMEIN |    @SGROSS |
+| @TIMEOUT |    @STARE |
++----------+-----------+
+| NETT WT. |    @SNET |
+|          |           |
+| AMOUNT   | @AMOUNT |
++----------+-----------+
+
+
+P
+
+........................      ........................     .....................
+@DRIVER RECEIVED BY                  WEIGHED BY
+

@@ -1,0 +1,47 @@
+--Start of file
+
+@date1
+please key in data of statement
+Statement date:
+
+drop view [REP_AGEING2]
+
+create view [REP_AGEING2] as
+SELECT ARINV.REFNO, ARINV.DEBTOR, ARINV.[DATE], ISNULL(AMOUNT, 0) AS Amount,
+                   (SELECT ISNULL(SUM(ISNULL(ARPAYDAT.TOTAL, 0)), 0)
+                    FROM   ARPAYDAT
+                    WHERE ARPAYDAT.INVOICE = ARINV.REFNO AND ARPAYDAT.[DATE] <= @date1) AS PAYTOTAL, 0 AS CNTOTAL,
+		    RATE
+FROM  ARINV
+WHERE [DATE] <= @date1 and amount <> 
+                   (SELECT ISNULL(SUM(ISNULL(ARPAYDAT.TOTAL, 0)), 0)
+                    FROM   ARPAYDAT
+                    WHERE ARPAYDAT.INVOICE = ARINV.REFNO AND ARPAYDAT.[DATE] <= @date1)   
+UNION ALL
+SELECT dbo.ARIPAY.REFNO, dbo.ARIPAY.DEBTOR, dbo.ARIPAY.[DATE], 0 AS AMOUNT, 
+               dbo.ARIPAY.AMOUNT+ ISNULL((SELECT SUM(ISNULL(dbo.ARCR.AMOUNT, 0)) 
+					FROM  dbo.ARCRDAT INNER JOIN
+               				dbo.ARCR ON dbo.ARCRDAT.REFNO = dbo.ARCR.REFNO
+					WHERE (dbo.ARCRDAT.REFNO = dbo.ARIPAY.REFNO) AND (dbo.ARCR.[DATE] <= @date1)
+		),0) - SUM(ISNULL(dbo.ARPAYDAT.TOTAL, 0)) AS PAYTOTAL,0 AS CNTOTAL, RATE
+FROM  ARIPAY LEFT OUTER JOIN ARPAYDAT ON (ARIPAY.REFNO = ARPAYDAT.REFNO and 
+             ((ARPAYDAT.[DATE] <= @date1) OR  (ARPAYDAT.[DATE] IS NULL) )) 
+WHERE  dbo.ARIPAY.[DATE] <= @date1
+GROUP BY dbo.ARIPAY.REFNO, dbo.ARIPAY.DEBTOR, dbo.ARIPAY.[DATE], dbo.ARIPAY.AMOUNT, RATE
+HAVING (dbo.ARIPAY.AMOUNT+ ISNULL((SELECT SUM(ISNULL(dbo.ARCR.AMOUNT, 0)) 
+					FROM  dbo.ARCRDAT INNER JOIN
+               				dbo.ARCR ON dbo.ARCRDAT.REFNO = dbo.ARCR.REFNO
+					WHERE (dbo.ARCRDAT.REFNO = dbo.ARIPAY.REFNO) AND (dbo.ARCR.[DATE] <= @date1)
+		),0) <> SUM(ISNULL(dbo.ARPAYDAT.TOTAL, 0)))
+UNION ALL
+SELECT REFNO, DEBTOR, [DATE], 0 AS AMOUNT, 0 as  PAYTOTAL,
+       amount  AS CNTOTAL, RATE
+FROM  ARCR
+WHERE ([DATE] <= @date1 OR
+               [DATE] IS NULL) AND (REFNO NOT IN
+                   (SELECT ARCRDAT.REFNO
+                    FROM   ARCRDAT INNER JOIN
+                                   ARIPAY ON ARCR.REFNO = ARIPAY.REFNO
+                    WHERE (ARIPAY.[DATE] <= @date1)))
+
+-- End of file

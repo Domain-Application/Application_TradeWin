@@ -1,0 +1,29 @@
+                       E-1DELIVERY INVOICE-0F
+TO:   E@NAMEF     D/N NO: E@TICKETF
+      E@ADD1F       DATE: E@DATEF
+      E@ADD2F VEHICLE NO: E@VEHICLEF
+      E@ADD3F     D/O NO: E@DOF
+SUBCON      : @SUBCON PAY TYPE: E@PTYPEF
+TRANSPORTER : @TNAME
+REMARKS     : @REMARKS
+GRADE BY    : @GRNAMEM
++----------+-----------+---------+---------------------------------+-------+-------+----------+
+|   TIME   | WEIGHT(KG)| CODE    | PRODUCT DESCRIPTION             | QTY.  |U/PRICE| SUB-TOTAL|
++----------+-----------+---------+---------------------------------+-------+-------+----------+
+| @TIMEIN |    @SGROSS | @PT1| @PNAME1| @QTY1 |@WT1 |@EXT1 |
+| @TIMEOUT |    @STARE | @PT2| @PNAME2| @QTY2 |@WT2 |@EXT2 |
++----------+-----------+ @PT3| @PNAME3| @QTY3 |@WT3 |@EXT3 |
+| WASTAGE  |    @WASTAGE | @PT4| @PNAME4| @QTY4 |@WT4 |@EXT4 |
++----------+-----------+ @PT5| @PNAME5| @QTY5 |@WT5 |@EXT5 |
+| NETT WT. |    @SNET | @PT6| @PNAME6| @QTY6 |@WT6 |@EXT6 |
+|          |           | @PT7| @PNAME7| @QTY7 |@WT7 |@EXT7 |
+|          |           | @PT8| @PNAME8| @QTY8 |@WT8 |@EXT8 |
++----------+-----------+---------+---------------------------------+-------+-------+----------+
+     @MANUAL                                                      TOTAL: |@TW |    RM:|@EXT0 |
+VEHICLE TYPE :@VTNAME   +-------+-------+----------+
+P
+
+........................      ........................     .....................
+@DRIVER RECEIVED BY                  WEIGHED BY
+I/C NO:@ICNO
+Print By : @PUSER

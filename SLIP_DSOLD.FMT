@@ -1,0 +1,28 @@
+#&C!Mt%Title%F
+#&@PADD1
+#&@PADD2
+#&@PADD3
+#&                      E-1PURCHASE INVOICE-0F
+#&FROM: E@NAMEF                 R/N NO: E@TICKETF
+#&      E@ADD1F                   DATE: E@DATEF
+#&      E@ADD2F             VEHICLE NO: E@VEHICLEF
+#&      E@ADD3F                 GRN NO: E@DOF
+#&PAY TYPE    : E@PTYPEF                           PAY DATE: E@PYDATEF
+#&                                                                PAGE : E%Page% of%TPage%F
+#&REMARKS     : @REMARKS
+#&GRADE BY    : @GRNAME
+#&TIME IN     : @TIMEIN   TIME OUT : @TIMEOUT            SCALE R/N NO : @SCALE
+#&GROSS       : @SGROSS     TARE : @STARE     WASTAGE : @WASTAGE      NETT WT. :@SNETM
+#0ДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+##ITEM  CODE      DESCRIPTION                                     QTY     U/PRICE       AMOUNT
+#0ДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+#R%s   %s%s  %s%s %s
+#GДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+#G  @MANUAL                                            Total :    %f             %f
+#GVEHICLE TYPE :@VTNAME
+#0
+#0P
+#G ........................                                       ...........................
+#G       RECEIVED BY                                                  AUTHORISED SIGNATTURE
+#G
+#E

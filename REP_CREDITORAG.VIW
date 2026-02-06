@@ -1,0 +1,96 @@
+--Start of file
+
+##
+
+drop view [REP_AGEINGAP]
+
+create view [REP_AGEINGAP] as
+SELECT REFNO, D.CODE AS DEBTOR, [DATE], AMOUNT, PAYTOTAL, CNTOTAL, [NAME], RATE, 'N' AS TYPE, PAYOVER, CROVER, D.TEL1, D.CL
+FROM(
+SELECT REFNO, debtor, [DATE], ISNULL(AMOUNT, 0) AS Amount, 0 AS PAYTOTAL, 0 AS CNTOTAL,
+                    RATE, 0 as PAYOVER, 0 as CROVER
+FROM  APINV -- inner join debtor on APinv.debtor = debtor.code
+WHERE [DATE] BETWEEN @two1 and @two2 
+UNION ALL
+SELECT dbo.APIPAY.REFNO, dbo.APIPAY.debtor, dbo.APIPAY.[DATE], 0 AS AMOUNT,
+               dbo.APIPAY.AMOUNT AS PAYTOTAL, 0 AS CNTOTAL,
+		RATE, 0, 0 
+FROM  dbo.APIPAY LEFT OUTER JOIN
+               dbo.APPAYDAT ON dbo.APIPAY.REFNO = dbo.APPAYDAT.REFNO
+WHERE ((dbo.APPAYDAT.[DATE] BETWEEN @two1 and @two2) OR
+               (dbo.APPAYDAT.[DATE] IS NULL) ) and dbo.APIPAY.[DATE] BETWEEN @two1 and @two2
+GROUP BY dbo.APIPAY.REFNO, dbo.APIPAY.debtor, dbo.APIPAY.[DATE], dbo.APIPAY.AMOUNT , RATE
+UNION ALL
+SELECT dbo.APCR.REFNO, dbo.APCR.debtor, dbo.APCR.[DATE], 0 AS AMOUNT, 0 AS PAYTOTAL,
+               dbo.APCR.AMOUNT AS CNTOTAL,
+               RATE, 0, 0
+FROM  dbo.APCR LEFT OUTER JOIN
+               dbo.APCRDAT ON dbo.APCR.REFNO = dbo.APCRDAT.REFNO
+WHERE ((dbo.APCRDAT.[DATE] BETWEEN @two1 and @two2) OR
+               (dbo.APCRDAT.[DATE] IS NULL)  ) and dbo.APcr.[DATE] BETWEEN @two1 and @two2
+GROUP BY dbo.APCR.REFNO, dbo.APCR.debtor, dbo.APCR.[DATE], dbo.APCR.AMOUNT, rate --debtor.SNAME, RATE, TEL1, CL
+) A LEFT OUTER JOIN CREDITOR D ON A.DEBTOR = D.CODE
+UNION ALL
+SELECT REFNO, D.CODE AS DEBTOR, [DATE], AMOUNT, PAYTOTAL, CNTOTAL, [NAME], RATE, 'B' AS TYPE, PAYOVER, CROVER, D.TEL1, D.CL
+FROM(
+SELECT REFNO, debtor, [DATE], ISNULL(AMOUNT, 0) AS Amount,
+                   (SELECT ISNULL(SUM(ISNULL(APPAYDAT.TOTAL, 0)), 0)
+                    FROM   APPAYDAT
+                    WHERE APPAYDAT.INVOICE = APINV.REFNO AND APPAYDAT.[DATE] <= @two2) AS PAYTOTAL,
+                   (SELECT ISNULL(SUM(ISNULL(APCRDAT.TOTAL, 0)), 0)
+                    FROM   APCRDAT
+                    WHERE APCRDAT.INVOICE = APINV.REFNO AND APCRDAT.[DATE] <= @two2) AS CNTOTAL,
+                    RATE, 0 as PAYOVER, 0 as CROVER
+FROM  APINV -- inner join debtor on APinv.debtor = debtor.code
+WHERE [DATE] <= @two2 and amount <>
+                   (SELECT ISNULL(SUM(ISNULL(APPAYDAT.TOTAL, 0)), 0)
+                    FROM   APPAYDAT
+                    WHERE APPAYDAT.INVOICE = APINV.REFNO AND APPAYDAT.[DATE] <= @two2)  + 
+                   (SELECT ISNULL(SUM(ISNULL(APCRDAT.TOTAL, 0)), 0)
+                    FROM   APCRDAT
+                    WHERE APCRDAT.INVOICE = APINV.REFNO AND APCRDAT.[DATE] <= @two2) 
+UNION ALL
+SELECT dbo.APIPAY.REFNO, dbo.APIPAY.debtor, dbo.APIPAY.[DATE], 0 AS AMOUNT,
+               dbo.APIPAY.AMOUNT - SUM(ISNULL(dbo.APPAYDAT.TOTAL, 0)) AS PAYTOTAL, 0 AS CNTOTAL,
+		RATE, 0, 0 
+FROM  dbo.APIPAY LEFT OUTER JOIN
+               dbo.APPAYDAT ON dbo.APIPAY.REFNO = dbo.APPAYDAT.REFNO
+        --inner join debtor on APipay.debtor = debtor.code
+WHERE ((dbo.APPAYDAT.[DATE] <= @two2) OR
+               (dbo.APPAYDAT.[DATE] IS NULL) ) and dbo.APIPAY.[DATE] <= @two2
+GROUP BY dbo.APIPAY.REFNO, dbo.APIPAY.debtor, dbo.APIPAY.[DATE], dbo.APIPAY.AMOUNT , RATE --,debtor.SNAME, RATE, TEL1, CL
+HAVING (dbo.APIPAY.AMOUNT <> SUM(ISNULL(dbo.APPAYDAT.TOTAL, 0)))
+UNION ALL
+SELECT dbo.APCR.REFNO, dbo.APCR.debtor, dbo.APCR.[DATE], 0 AS AMOUNT, 0 AS PAYTOTAL,
+               dbo.APCR.AMOUNT - SUM(ISNULL(dbo.APCRDAT.TOTAL, 0)) AS CNTOTAL,
+               RATE, 0, 0
+FROM  dbo.APCR LEFT OUTER JOIN
+               dbo.APCRDAT ON dbo.APCR.REFNO = dbo.APCRDAT.REFNO
+        --inner join debtor on APcr.debtor = debtor.code
+WHERE ((dbo.APCRDAT.[DATE] <= @two2) OR
+               (dbo.APCRDAT.[DATE] IS NULL)  ) and dbo.APcr.[DATE] <= @two2
+GROUP BY dbo.APCR.REFNO, dbo.APCR.debtor, dbo.APCR.[DATE], dbo.APCR.AMOUNT, rate --debtor.SNAME, RATE, TEL1, CL
+HAVING (dbo.APCR.AMOUNT <> SUM(ISNULL(dbo.APCRDAT.TOTAL, 0)))
+UNION ALL
+SELECT REFNO, DEBTOR, [DATE], 0, 0, 0, RATE, isnull(AMOUNT,0) - isnull((SELECT SUM(isnull(TOTAL,0)) 
+FROM APPAYDAT C LEFT OUTER JOIN APINV D ON C.INVOICE = D.REFNO
+WHERE D.[DATE]<= @two2 AND C.REFNO = APIPAY.REFNO),0) AS PAYOVER, 0 
+FROM APIPAY
+where [DATE] <= @two2
+group by REFNO, DEBTOR, [DATE], RATE, AMOUNT
+HAVING isnull(AMOUNT,0) -  isnull((SELECT SUM(isnull(TOTAL,0)) 
+FROM APPAYDAT C LEFT OUTER JOIN APINV D ON C.INVOICE = D.REFNO
+WHERE D.[DATE]<= @two2 AND C.REFNO = APIPAY.REFNO),0) > 0
+UNION ALL
+SELECT REFNO, DEBTOR, [DATE], 0, 0, 0, RATE, 0, isnull(AMOUNT,0) - isnull((SELECT SUM(isnull(TOTAL,0)) 
+FROM APCRDAT C LEFT OUTER JOIN APINV D ON C.INVOICE = D.REFNO
+WHERE D.[DATE]<= @two2 AND C.REFNO = APCR.REFNO),0) AS CROVER
+FROM APCR
+where [DATE] <= @two2
+group by REFNO, DEBTOR, [DATE], RATE, AMOUNT
+HAVING isnull(AMOUNT,0) -  isnull((SELECT SUM(isnull(TOTAL,0)) 
+FROM APCRDAT C LEFT OUTER JOIN APINV D ON C.INVOICE = D.REFNO
+WHERE D.[DATE]<= @two2 AND C.REFNO = APCR.REFNO),0) > 0
+) A LEFT OUTER JOIN CREDITOR D ON A.DEBTOR = D.CODE
+
+-- End of file

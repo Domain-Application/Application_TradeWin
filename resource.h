@@ -396,7 +396,6 @@
 #define IDI_ICON17                      653
 #define IDD_AUTO_OFFSET_INV             659
 #define ID_ADDTASK                      1001
-#define IDC_CLOCKFRAME                  1002
 #define IDC_FILENAME                    1003
 #define ID_APPEND                       1004
 #define ID_OVERWRT                      1005
@@ -464,11 +463,9 @@
 #define IDC_NAME31                      1068
 #define IDC_CRTOTAL                     1069
 #define IDC_DRTOTAL                     1070
-#define IDC_REFNO                       1071
 #define IDC_STAFF                       1072
 #define IDC_PARTICULAR                  1074
 #define IDC_REMARK                      1075
-#define IDC_DATE                        1076
 #define IDC_TERMS                       1077
 #define IDC_PONO                        1078
 #define IDC_CANCEL                      1079
@@ -678,6 +675,7 @@
 #define IDC_CREDIT                      1326
 #define IDC_LABEL                       1327
 #define IDC_NT                          1328
+#define IDC_EINV_FUNCTIONS              1329
 #define IDR_ACCBAR                      1633
 #define IDR_APBAR                       1634
 #define IDR_TABLEBAR                    1634

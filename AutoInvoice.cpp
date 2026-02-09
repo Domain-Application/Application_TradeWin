@@ -74,6 +74,7 @@ void DoAutoInvoice(DB *df,DB *invmain,DB *invsub)
 		lset(invsub->dat[VIWB_DO], invwb.dat[1]);
 		rset(invsub->dat[VIWB_QTY], invwb.dat[4]);
 		rset(invsub->dat[VIWB_AMOUNT], invwb.dat[5]);
+		lset(invsub->dat[GetDbFieldNo(invsub, "CLASSIFICATION")], "022");
 
 		invsub->AddNew();
 		if(invsub->m_SaveFlag==FALSE) {

@@ -19,6 +19,11 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+DB  malaysia_state;
+DB  malaysia_city;
+DB  postcode;
+DB  classification;
+
 // Version SST
 char txtSST_StartDate[20];
 ////
@@ -108,7 +113,6 @@ DB  dp_do(IDD_DP_DO);
 DB  accodehq(IDD_ACCODEHQ);
 DB  stkpf(IDD_STKPF);
 
-//char *company = "�{j��{���{���ʻ��{�";
 char *company = "TRADEWIN METALS SDN BHD";
 char *tcompany[20] = {
 		"A9C9DAAA9A795A0AEC1A9AA9DA2AB9ECB9AA0AECCA6AAA",
@@ -422,6 +426,11 @@ void CMenuApp::OpenAllDataFile()
 			logo.Update();
 		}
 	}
+
+    ado(&malaysia_state,"malaysia_state");
+    ado(&malaysia_city,"malaysia_city");
+    ado(&postcode,"postcode");
+    ado(&classification, "classification");
     
     //tado(&scale_qrcode, "scale_qrcode");
 	tado(&scaledwsub,"scaledwsub",init_scalesub);

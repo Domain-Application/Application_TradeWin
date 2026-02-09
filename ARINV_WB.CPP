@@ -27,6 +27,27 @@ CArinvWb::CArinvWb(UINT IDD,DB *pdf, int Idx,CWnd* pParent /*=NULL*/)
     ExtraButton1 = IDC_BUTTON1;
 }
 
+void CArinvWb::OnCreate_Einv_UI()
+{
+    pPage[1] = NULL;
+
+    CRect rcDlgs;
+    GetDlgItem(IDC_EINV_FUNCTIONS)->GetWindowRect(rcDlgs);
+    pPage[1] = new CEINV_Functions;
+    VERIFY(pPage[1]->Create(CEINV_Functions::IDD, this));
+    pPage[1]->df = df;
+    pPage[1]->sub = sub;
+    pPage[1]->MoveWindow(rcDlgs);
+    pPage[1]->ShowWindow(SW_SHOW);
+    ScreenToClient(rcDlgs);
+}
+
+BOOL CArinvWb::OnInitDialog()
+{
+    OnCreate_Einv_UI();
+    CParent::OnInitDialog();
+	return TRUE;
+}
 
 void CArinvWb::DoDataExchange(CDataExchange* pDX)
 {
@@ -34,7 +55,6 @@ void CArinvWb::DoDataExchange(CDataExchange* pDX)
     //{{AFX_DATA_MAP(CArinvWb)
 	//}}AFX_DATA_MAP
 }
-
 
 BEGIN_MESSAGE_MAP(CArinvWb, CParent)
     //{{AFX_MSG_MAP(CArinvWb)
@@ -76,6 +96,10 @@ BOOL CArinvWb::IsCannotEdit()
 
 void CArinvWb::ShowInformation()
 {   
+	if (pPage[1])
+    {
+        pPage[1]->ShowInformation();
+    }
     ReFreshSubFile();
 	
 	CString str;
@@ -105,6 +129,7 @@ void CArinvWb::ShowInitFrame()
     fg.SetTitle("D/O No",1400,1);
     fg.SetTitle("Qty(Kg)",1000,7);
     fg.SetTitle("Amount",1200,7);
+	fg.SetTitle("Classification Code",1650,1);
 
 /*
 	if(!stricmp(sub->name,"apoinv_wb")) {
@@ -141,7 +166,8 @@ void CArinvWb::ReplaceSubGrid(long rec,long irec,CMSFlexGrid *m_grid,DB *sub,int
    // fg.SetText(&allTicket,2,3,4,5,-1);
 	fg.SetText(&allTicket,2,3,5,-1);
     fg.SetText(sub,VIWB_QTY);
-    fg.SetText(sub,VIWB_AMOUNT);		
+    fg.SetText(sub,VIWB_AMOUNT);
+	fg.SetText(sub,GetDbFieldNo(sub,"CLASSIFICATION"));		
 }
 
 void CArinvWb::SetAttribute(int flag,int fld)
@@ -335,6 +361,7 @@ void CArinvWb::OnCreateNewInvoice()
         lset(sub->dat[VIWB_DO], invwb.dat[1]);
         rset(sub->dat[VIWB_QTY], invwb.dat[4]);
         rset(sub->dat[VIWB_AMOUNT], invwb.dat[5]);
+		lset(sub->dat[GetDbFieldNo(sub,"CLASSIFICATION")], "022");
 /* Scale ticket will consider a ticket
 		if(Purchase_Flag) {
 			qd(sub->dat[VIWB_DO],&ds);
@@ -395,4 +422,16 @@ void CArinvWb::OnDblClickMsflexgrid1()
 	//GST
 	SetSubTotal(df);
 	ShowInformation();	
+}
+
+void SetTransactionType(DB *df, DB *accode)
+{
+	if (accode->Boolean(GetDbFieldNo(accode, "SELFBILL"))) 
+	{
+		lset(df->dat[GetDbFieldNo(df, "tt")], "S");
+	} 
+	else 
+	{
+		lset(df->dat[GetDbFieldNo(df, "tt")], "IV");
+	}
 }

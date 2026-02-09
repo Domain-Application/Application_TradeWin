@@ -9,6 +9,7 @@
 #include "state.h"
 #include "DpDo.h"
 #include "Pr.h"
+#include "Cmprofile.h"
 
 
 enum menu {M_WEIGHING=1,M_VIEW,M_INVOICE,M_CTRL,M_REPORT,M_OTHER,M_STOCK,M_BACKUP};
@@ -16,6 +17,18 @@ enum kkk {M_C1 = M_CTRL *10+1,M_C2, M_C3,M_C4};
 //enum kkk2 {AR = M_ACC *10+1,AP};
 
 long m[15];
+
+void AdminDb_CMProfile(DB *df)
+{
+    if(df->ID==0) {
+        AfxMessageBox("Database not open");
+        return;
+    }
+    CCmprofile p1(IDD_CMPROFILE,df,df->f[1].idx & 0x01);
+    p1.LptNo = 0; //preview
+	p1.OneRecordOnly = TRUE;
+    p1.DoModal();
+}
 
 void PublicTicketData(DB *df)
 {
@@ -366,7 +379,12 @@ int CMenuApp::SubProgram(int key)
         CleanDatabase();
         break;    
     case M_OTHER*10+5:
-        return OnSystemUpgrade("HENGHUP.EXE");
+        {
+			DB adoTmp(IDD_CMPROFILE);
+			ado(&adoTmp, "profile_einv");
+			AdminDb_CMProfile(&adoTmp);
+			dclose(&adoTmp);
+		}
         break;
 	case M_OTHER*10+6:
         ViewViolation();

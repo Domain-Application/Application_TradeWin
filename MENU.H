@@ -18,7 +18,9 @@
 //}}AFX_INCLUDES
 
 extern DB scale_qrcode;
-
+extern void SetTransactionType(DB *df, DB *accode);
+extern DB  malaysia_state,malaysia_city,postcode;
+extern DB classification;
 //20230615
 double Get_Adjustment(double subtotal);
 //END

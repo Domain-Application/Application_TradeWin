@@ -35,6 +35,7 @@ public:
 	//{{AFX_VIRTUAL(CSpitem)
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	virtual void OnEinv();
 	//}}AFX_VIRTUAL
 
 // Implementation

@@ -108,8 +108,9 @@ CMainFrame::CMainFrame()
 //	m_System.Format("%s Ver 8.00",title); // Goods Rejected, Public Weighing
 	// m_System.Format("%s VER 1.00",title);
     // m_System.Format("%s VER 1.00",title); // Kiosk System Integration
-	m_System.Format("%s VER 1.01",title); // scale receive change issued by from bala to login user, added container for scale despatch with no logo and logo version
-	m_System.Format("%s VER 1.02",title); // 20230717 added rounding adj, final amount and actual amount at scale receiving screen 
+	// m_System.Format("%s VER 1.01",title); // scale receive change issued by from bala to login user, added container for scale despatch with no logo and logo version
+	// m_System.Format("%s VER 1.02",title); // 20230717 added rounding adj, final amount and actual amount at scale receiving screen 
+    m_System.Format("%s VER 2.00",title); // E-Inv version 
     bCommOpen = TRUE;
 }
 

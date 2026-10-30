@@ -4,7 +4,7 @@ The single reference for this application. **Part 1** explains how to use it, in
 
 - Repo: `Domain-Application/Application_TradeWin`, branch `main`. There is **no schema repo** (no `SQL_TradeWin`) and no `.sql` file in this repo: column types in these files are marked "type from SQL_LekokPaper (sister app), unverified for TradeWin" or "type: unverified".
 - Last verified against commit `2f77122` ("E-Invoice enhancement").
-- Translation status: English only. No zh-CN copy yet (`docs/module-reference/zh-CN/` does not exist).
+- Translation status: Chinese copy in [zh-CN/README.md](zh-CN/README.md), synced 2026-10-30 (commit c76cd62).
 - Rule: any change to behaviour, tables, fields, screens, reports or calculations must update this reference in the same commit.
 - This repo has no `User_Guide` and no other `docs/` file, so there are no screenshots to link; none are invented here.
 - **This is a member of the SengHiap family** (copy of Application_SengHiap_Metal). Its source is closest to Application_LekokPaper (192 of 226 shared source, header, resource and project files are byte-identical and the repo has no file that Lekok lacks) and it adds the **e-invoice enhancement** of February 2026. See [Differences from Application_LekokPaper](#differences-from-application_lekokpaper).
@@ -500,7 +500,7 @@ See [reports 2.7](reports.md#27-report-catalogue): 45 picker entries in 7 groups
 | 2026-10-19 | `2f77122` | Claude (draft for review) | First version of the module reference for Application_TradeWin (index and seven module files), started from the Application_LekokPaper reference and verified against this repo's code and the shared wlib32 e-invoice classes |
 
 - Last verified against commit `2f77122`.
-- Translation status: English only.
+- Translation status: zh-CN written, synced 2026-10-30.
 
 ## Dormant code
 
@@ -534,7 +534,7 @@ Code that is compiled into `menu.exe` (or sits in the repo) but has no path from
 | Crystal layout internals (fields, parameters) of the 407 `.rpt` files | Binary files; only names are given |
 | Dormant accounting screens and reports (see [Dormant code](#dormant-code)) | Not reachable from the menu |
 | Tables of the sister schema with no code in this repo | Legacy; not listed individually because no schema is available here |
-| zh-CN translation | Not yet written |
+| zh-CN translation | Done, synced 2026-10-30 |
 | Screenshots | The repo has none and the app was not run for this document |
 
 ## Code findings

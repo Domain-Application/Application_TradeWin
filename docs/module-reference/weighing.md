@@ -2,7 +2,7 @@
 
 > Part of the TradeWin module reference. Index and shared sections: [README](README.md).
 > Menu items covered here: 1.1 RECEIVING NOTE and 1.2 DESPATCH (first weight and second weight), 1.3 and 1.4 View/Edit/Delete First Weight, 1.5 Public Weighing, and the return-note weighing that has no menu item (nodes 18 and 19). **Scale Weighing (1.6) and Scale Despatch Weighing (1.7)** have their own file: [scale-weighing.md](scale-weighing.md).
-> Last verified against commit `2f77122`. Translation status: English only (no zh-CN copy yet).
+> Last verified against commit `2f77122`. Translation status: Chinese copy in [zh-CN/weighing.md](zh-CN/weighing.md), synced 2026-10-30.
 
 ## Contents
 
@@ -490,7 +490,7 @@ No outbound web API, camera or sensor box is used by this module.
 |---|---|---|---|
 | 2026-10-19 | `2f77122` | Claude (draft for review) | First version for Application_TradeWin, started from the Application_LekokPaper reference and verified against this repo's code |
 
-- Last verified against commit `2f77122`. Translation status: English only.
+- Last verified against commit `2f77122`. Translation status: zh-CN written, synced 2026-10-30.
 
 ### Code findings (for the developer)
 

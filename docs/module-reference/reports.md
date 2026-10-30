@@ -2,7 +2,7 @@
 
 > Part of the TradeWin module reference. Index and shared sections: [README](README.md).
 > Menu item covered: 5 Report. The ticket, invoice and list forms printed from other screens are described in their own modules.
-> Last verified against commit `2f77122`. Translation status: English only (no zh-CN copy yet).
+> Last verified against commit `2f77122`. Translation status: Chinese copy in [zh-CN/reports.md](zh-CN/reports.md), synced 2026-10-30.
 
 ## Contents
 
@@ -415,7 +415,7 @@ None. (Excel, Word and PDF export are done by the report window.)
 |---|---|---|---|
 | 2026-10-19 | `2f77122` | Claude (draft for review) | First version for Application_TradeWin: the container files are identical to those of Application_LekokPaper (45 entries, 7 groups), file counts and line references re-checked against this repo |
 
-- Last verified against commit `2f77122`. Translation status: English only.
+- Last verified against commit `2f77122`. Translation status: zh-CN written, synced 2026-10-30.
 
 ### Code findings (for the developer)
 

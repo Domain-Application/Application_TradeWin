@@ -2,7 +2,7 @@
 
 > Part of the TradeWin module reference. Index and shared sections: [README](README.md).
 > Menu items covered: 4.1.1 Product Code, 4.1.2 Lorry Data Maintenance, 4.1.3 Category Code, 4.1.4 Unit Code, 4.1.5 Product Grade, 4.1.6 Pay Type, 4.1.7 Country Code, 4.1.8 Product Group, 4.1.9 GWST, 4.2.1 Buyer/Seller Code, 4.2.2 Driver Code, 4.2.3 Transporter, 4.2.4 Tax Code. This app has **no menu 4.3 (Contract / Sales Order)** and no Gatepass, Yard, Marketing or Actual Code tables on the menu; the purchase-order and sales-order screens and a few more tables exist in code but have no menu item (listed in 2.5). The account screen (4.2.1) also carries the **e-invoice data** button of the E-Invoice enhancement.
-> Last verified against commit `2f77122`. Translation status: English only (no zh-CN copy yet).
+> Last verified against commit `2f77122`. Translation status: Chinese copy in [zh-CN/control-tables.md](zh-CN/control-tables.md), synced 2026-10-30.
 
 ## Contents
 
@@ -627,7 +627,7 @@ See [README](README.md#26-end-to-end-flows).
 |---|---|---|---|
 | 2026-10-19 | `2f77122` | Claude (draft for review) | First version for Application_TradeWin, started from the Application_LekokPaper reference; simple driver table, account screen without prices and with e-invoice data, no grade-price trigger |
 
-- Last verified against commit `2f77122`. Translation status: English only.
+- Last verified against commit `2f77122`. Translation status: zh-CN written, synced 2026-10-30.
 
 ### Code findings (for the developer)
 

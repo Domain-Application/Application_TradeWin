@@ -2,7 +2,7 @@
 
 > Part of the TradeWin module reference. Index and shared sections: [README](README.md).
 > Menu items covered: 1.6 Scale Weighing (Unlimited Product Features) and 1.7 Scale Despatch Weighing (Unlimited Product Features). Compared with Application_LekokPaper, the scale screen here is the plain header-detail screen of wlib32: **no weight capture from the indicator, no bin-code master, no Cancel Ticket, no customer price list and no unlimited-product receiving and despatch forms**.
-> Last verified against commit `2f77122`. Translation status: English only (no zh-CN copy yet).
+> Last verified against commit `2f77122`. Translation status: Chinese copy in [zh-CN/scale-weighing.md](zh-CN/scale-weighing.md), synced 2026-10-30.
 
 ## Contents
 
@@ -463,7 +463,7 @@ See [README](README.md#26-end-to-end-flows).
 |---|---|---|---|
 | 2026-10-19 | `2f77122` | Claude (draft for review) | First version for Application_TradeWin, started from the Application_LekokPaper scale reference and verified against this repo's code (scale lines simplified, no unlimited-product forms) |
 
-- Last verified against commit `2f77122`. Translation status: English only.
+- Last verified against commit `2f77122`. Translation status: zh-CN written, synced 2026-10-30.
 
 ### Code findings (for the developer)
 

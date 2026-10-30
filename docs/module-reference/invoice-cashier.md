@@ -2,7 +2,7 @@
 
 > Part of the TradeWin module reference. Index and shared sections: [README](README.md).
 > Menu items covered: 3.1 Purchase Invoice, 3.2 Sales Invoice, 3.3 Export Purchase Invoice, 3.4 Export Sales Invoice, and the **e-invoice panel** that sits on the two invoice screens (this program is the "E-Invoice enhancement" version, program title `VER 2.00`). This app has **no cashier module** (no End Day Closing, payout or float, which Seng Hiap Metal has as 4.4); the file name `invoice-cashier.md` is kept so the family of references lines up file by file.
-> Last verified against commit `2f77122`. Translation status: English only (no zh-CN copy yet).
+> Last verified against commit `2f77122`. Translation status: Chinese copy in [zh-CN/invoice-cashier.md](zh-CN/invoice-cashier.md), synced 2026-10-30.
 
 ## Contents
 
@@ -567,7 +567,7 @@ See [README](README.md#26-end-to-end-flows).
 |---|---|---|---|
 | 2026-10-19 | `2f77122` | Claude (draft for review) | First version for Application_TradeWin, started from the Application_LekokPaper reference; adds the e-invoice panel, the Classification column and the e-invoice database objects, verified against this repo and the wlib32 e-invoice classes |
 
-- Last verified against commit `2f77122`. Translation status: English only.
+- Last verified against commit `2f77122`. Translation status: zh-CN written, synced 2026-10-30.
 
 ### Code findings (for the developer)
 

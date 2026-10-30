@@ -1,4 +1,4 @@
-📘 [Module reference / 模块参考](docs/module-reference/README.md)
+📘 [Module reference / 模块参考](docs/module-reference/README.md) · [中文](docs/module-reference/zh-CN/README.md)
 
 # Application_TradeWin
 

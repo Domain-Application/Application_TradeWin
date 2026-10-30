@@ -2,7 +2,7 @@
 
 > Part of the TradeWin module reference. Index and shared sections: [README](README.md).
 > Menu items covered: 2.1 RECEIVING NOTE, 2.2 DESPATCH and 2.3 Public Weighing; and the ticket nodes that have no menu item at all: 23 Direct delivery ticket, 24 Direct delivery pricing update, 25 Despatch D/O, 27 Return note. Scale tickets (SCALE, SCALEDW) are opened from the weighing menu, see [Scale weighing](scale-weighing.md).
-> Last verified against commit `2f77122`. Translation status: English only (no zh-CN copy yet).
+> Last verified against commit `2f77122`. Translation status: Chinese copy in [zh-CN/tickets.md](zh-CN/tickets.md), synced 2026-10-30.
 
 ## Contents
 
@@ -580,7 +580,7 @@ None. (The columns `API_SCANNED_QR` and `API_DISPENSED` of `WDS` and `WDP` are w
 | Date | Commit | Who | What changed |
 |---|---|---|---|
 | 2026-10-19 | `2f77122` | Claude (draft for review) | First version for Application_TradeWin, started from the Application_LekokPaper reference and verified against this repo's code (ticket menu 2.1 to 2.3 live, no cancel, no rounding, unit price typed) |
-- Last verified against commit `2f77122`. Translation status: English only.
+- Last verified against commit `2f77122`. Translation status: zh-CN written, synced 2026-10-30.
 
 ### Code findings (for the developer)
 

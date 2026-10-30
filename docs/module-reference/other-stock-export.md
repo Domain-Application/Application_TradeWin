@@ -2,7 +2,7 @@
 
 > Part of the TradeWin module reference. Index and shared sections: [README](README.md).
 > Menu items covered: 6.1 Set Password, 6.2 Company Profile, 6.3 Operator Information, 6.4 Reset Database, 6.5 E-Invoice Profile, 7.1 Adjustment Data Entry, 7.2 Reason Code. This app has **no Export menu 8 and no Backup menu 9** and **no program-update item**: the two export functions are menu items 3.3 and 3.4 and are described in [Invoice and Export](invoice-cashier.md); the backup call in `SubProgram` is commented out. The file name `other-stock-export.md` is kept so the family of references lines up file by file.
-> Last verified against commit `2f77122`. Translation status: English only (no zh-CN copy yet).
+> Last verified against commit `2f77122`. Translation status: Chinese copy in [zh-CN/other-stock-export.md](zh-CN/other-stock-export.md), synced 2026-10-30.
 
 ## Contents
 
@@ -503,7 +503,7 @@ No stock API views exist in this repo (unlike Seng Hiap Metal).
 |---|---|---|---|
 | 2026-10-19 | `2f77122` | Claude (draft for review) | First version for Application_TradeWin, started from the Application_LekokPaper reference; 6.4 is the real Reset Database, 6.5 is the E-Invoice Profile, no update item, no licence timer |
 
-- Last verified against commit `2f77122`. Translation status: English only.
+- Last verified against commit `2f77122`. Translation status: zh-CN written, synced 2026-10-30.
 
 ### Code findings (for the developer)
 

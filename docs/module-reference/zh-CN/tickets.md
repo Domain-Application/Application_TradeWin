@@ -162,7 +162,9 @@ DO No、Date、Despatch ticket、PO number、L/C number、Delivery To（带地�
 
 ### 退货单（节点 18、19 和 27，没有菜单项）
 
-版面与发货过磅单相同，另有一个必填的“Despatch Ticket”链接：第一次过磅屏幕会提供同一辆货车最近 10 天内的发货过磅单。
+版面与发货过磅单相近，另有一个必填的“Despatch Ticket”链接：第一次过磅屏幕会提供同一辆货车最近 10 天内的发货过磅单。
+
+**这些屏幕上隐藏的内容。**最终的退货单上，Despatch Ticket 框（它在第一次过磅屏幕上填写）、**THIRD PARTY GRADING** 按钮和付款日期框都是隐藏的，所以无法使用。第一次过磅的退货单上，付款日期及其 SET 和 UNSET 按钮以及打印次数是隐藏的。
 
 ## 1.6 这个数字从哪里来？
 

@@ -135,14 +135,16 @@ flowchart LR
 | PO (sales form only) | 订单参考号 | 否 | 输入 |
 | Sub Total | 各行金额之和 | - | 计算 |
 | Tax % | 税码的税率 | - | 来自税码 |
-| GST Amt. | 税额；9 级以下的用户不能修改 | - | 计算 |
+| GST Amt. | 税额；这个框已关闭，谁也不能在里面输入 | - | 计算 |
 | Net Total | 小计加税额 | - | 计算 |
 | Total Qty, Sub Total (bottom) | 明细表格的合计 | - | 计算 |
 | Rounding Adj, Final Amount (purchase form only) | 表单上显示，但程序不计算它们：不要依赖它们 | - | - |
 | Transaction Type | 电子发票的发票类型（表单上显示这个框；程序里有一个会为自开发票账户设置 `IV` 或 `S` 的程序，但没有任何东西调用它，所以除非输入，否则一直是空白） | - | 输入 |
 | E-invoice status（面板） | 电子发票连接程序对这张发票的最新备注，从未提交过则是 `NEW` | - | 显示发票时从电子发票日志表读取 |
 
-税码和“GST Inclusive”勾选在表里有，但在表单上不可见。
+税码框在表单上可见。Sub Total、Tax %、GST Amt. 和 Net Total 这几个框（采购表单上还有 Rounding Adj）已关闭：谁也不能在里面输入。
+
+**这些屏幕上隐藏的内容。**发票记录里还有更多字段（“GST Inclusive”勾选和“Upload To HQ On Hold”勾选），但本程序的发票屏幕不显示它们，所以无法使用。
 
 **明细行表格：**No、Ticket No、Date、Vehicle No、D/O No、Qty(Kg)、Amount、Classification Code（日期、货车和 D/O 号来自过磅单；每个新明细行的分类代码一开始是 `022`）。双击一行打开它：Ticket No、Quantity、Amount、Classification。
 
@@ -398,7 +400,7 @@ erDiagram
 ### 流程：发票屏幕
 
 1. `start_arinv_wb`（ARINV_WB.CPP:207-214）：`FldDefault(2)`，`STATUS = "0"`，`CURRENCY = "RM"`。
-2. `tell_arinv_wb`（ARINV_WB.CPP:225-267）：9 级以下的用户跳过状态和税额；选择账户（`IVWB_ACCODE`，改变之后）会查找 `accode` 并调用 `FindTaxCode(df, Purchase_Flag)`；修改税码调用 `FindPercen` 和 `SetSubTotal`；税额为空时同样处理；每次调用都以 `SetSubTotal` 结束。`arinv_wb_initial`（ARINV_WB.CPP:216-223）使 9 级以下日期只读。
+2. `tell_arinv_wb`（ARINV_WB.CPP:225-267）：9 级以下的用户跳过状态和税额（税额框在对话框里本来就已关闭，所以没有人在那里输入）；选择账户（`IVWB_ACCODE`，改变之后）会查找 `accode` 并调用 `FindTaxCode(df, Purchase_Flag)`；修改税码调用 `FindPercen` 和 `SetSubTotal`；税额为空时同样处理；每次调用都以 `SetSubTotal` 结束。`arinv_wb_initial`（ARINV_WB.CPP:216-223）使 9 级以下日期只读。
 3. `FindTaxCode`（TAXCODE.CPP:53-70）：发票日期早于 `txtSST_StartDate`（`20180901`，在 MENU.CPP:382 设置）时：采购 = 账户的税码，空白时为 `NR`；销售 = `SR`；从这个日期起用账户的税码（字段 `ACCODE_TAXCODE`，见 2.10 发现 3）。然后是 `FindPercen`（37-51）：百分比 = `taxcode` 字段 3，发票日期早于 `STKPF.GST_DATE` 时强制为 0。
 4. `SetSubTotal`（TAXCODE.CPP:16-35）：税额 = 金额 x % / 100，含税时为 金额 x % / (100 + %)；`SUBTOTAL` = 金额 + 税额，含税时除外。
 5. `CArinvWb::ShowInformation`（ARINV_WB.CPP:97-119）：刷新明细行，并把 `SELECT SUM(AMOUNT) FROM <lines> WHERE INVOICE = ...` 写入表头的 `AMOUNT`。

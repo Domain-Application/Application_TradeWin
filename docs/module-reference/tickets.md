@@ -160,7 +160,9 @@ DO No, Date, Despatch ticket, PO number, L/C number, Delivery To (with the addre
 
 ### Return note (nodes 18, 19 and 27, no menu item)
 
-Same layout as the despatch ticket, with a required "Despatch Ticket" link: the first weight screen offers the despatch tickets of the same lorry in the last 10 days.
+Similar layout to the despatch ticket, with a required "Despatch Ticket" link: the first weight screen offers the despatch tickets of the same lorry in the last 10 days.
+
+**Hidden on these screens.** On the final return note the Despatch Ticket box (it is filled on the first-weight screen), the **THIRD PARTY GRADING** button and the payment date box are hidden, so you cannot use them. On the first-weight return note the payment date with its SET and UNSET buttons and the print counter are hidden.
 
 ## 1.6 Where does this number come from?
 

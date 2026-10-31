@@ -133,14 +133,16 @@ Note: the exported amount is the sum of the line amounts, **without tax** (see 1
 | PO (sales form only) | Order reference | No | Typed |
 | Sub Total | Sum of the line amounts | - | Calculated |
 | Tax % | Rate of the tax code | - | From the tax code |
-| GST Amt. | Tax amount; users below level 9 cannot change it | - | Calculated |
+| GST Amt. | Tax amount; the box is switched off, nobody can type in it | - | Calculated |
 | Net Total | Sub total plus tax | - | Calculated |
 | Total Qty, Sub Total (bottom) | Totals of the line grid | - | Calculated |
 | Rounding Adj, Final Amount (purchase form only) | Shown on the form, but the program does not calculate them: do not rely on them | - | - |
 | Transaction Type | Invoice type for the e-invoice (the form shows the box; the program has a routine that would set `IV` or `S` for self-billed accounts but nothing calls it, so it stays blank unless typed) | - | Typed |
 | E-invoice status (panel) | Latest remark of the e-invoice connector for this invoice, `NEW` if it was never submitted | - | Read from the e-invoice log table when the invoice is shown |
 
-The Tax Code and the "GST Inclusive" tick exist in the table but are not visible on the form.
+The Tax Code box is visible on the form. The Sub Total, Tax %, GST Amt. and Net Total boxes (and Rounding Adj on the purchase form) are switched off: nobody can type in them.
+
+**Hidden on these screens.** The invoice record has more fields (the "GST Inclusive" tick and an "Upload To HQ On Hold" tick), but the invoice screens of this program do not show them, so you cannot use them.
 
 **Line grid:** No, Ticket No, Date, Vehicle No, D/O No, Qty(Kg), Amount, Classification Code (the date, lorry and D/O number come from the ticket; the classification code starts as `022` on every new line). Double-click a line to open it: Ticket No, Quantity, Amount, Classification.
 
@@ -396,7 +398,7 @@ Types from `SQL_LekokPaper` scripts `AROINV_WB.sql`, `APOINV_WB.sql` (sister app
 ### Flow: invoice screen
 
 1. `start_arinv_wb` (ARINV_WB.CPP:207-214): `FldDefault(2)`, `STATUS = "0"`, `CURRENCY = "RM"`.
-2. `tell_arinv_wb` (ARINV_WB.CPP:225-267): status and tax amount are skipped for users below level 9; picking the account (`IVWB_ACCODE`, after a change) looks up `accode` and calls `FindTaxCode(df, Purchase_Flag)`; changing the tax code calls `FindPercen` and `SetSubTotal`; a blank tax amount does the same; every call ends with `SetSubTotal`. `arinv_wb_initial` (ARINV_WB.CPP:216-223) makes the date read-only below level 9.
+2. `tell_arinv_wb` (ARINV_WB.CPP:225-267): status and tax amount are skipped for users below level 9 (the tax amount box is switched off in the dialog anyway, so nobody types there); picking the account (`IVWB_ACCODE`, after a change) looks up `accode` and calls `FindTaxCode(df, Purchase_Flag)`; changing the tax code calls `FindPercen` and `SetSubTotal`; a blank tax amount does the same; every call ends with `SetSubTotal`. `arinv_wb_initial` (ARINV_WB.CPP:216-223) makes the date read-only below level 9.
 3. `FindTaxCode` (TAXCODE.CPP:53-70): invoice date before `txtSST_StartDate` (`20180901`, set in MENU.CPP:382): purchase = the account's tax code, `NR` when blank; sales = `SR`; from that date the account's tax code (field `ACCODE_TAXCODE`, see 2.10 finding 3). Then `FindPercen` (37-51): percent = `taxcode` field 3, forced to 0 when the invoice date is before `STKPF.GST_DATE`.
 4. `SetSubTotal` (TAXCODE.CPP:16-35): tax = amount x % / 100, or amount x % / (100 + %) when included; `SUBTOTAL` = amount + tax unless included.
 5. `CArinvWb::ShowInformation` (ARINV_WB.CPP:97-119): refreshes the lines and writes `SELECT SUM(AMOUNT) FROM <lines> WHERE INVOICE = ...` into the header `AMOUNT`.

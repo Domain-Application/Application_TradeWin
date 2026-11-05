@@ -240,7 +240,7 @@ flowchart LR
 |---|---|---|---|
 | Purchase invoice | Bill from a supplier | Invois belian | 采购发票 |
 | Sales invoice | Bill to a customer | Invois jualan | 销售发票 |
-| Unbilled ticket | Ticket not on any invoice | Tiket belum bil | 未开发票磅单 |
+| Unbilled ticket | Ticket not on any invoice | Tiket belum bil | 未开发票过磅单 |
 | Tax code | Rate code | Kod cukai | 税码 |
 | Net total | Sub total plus tax | Jumlah bersih | 净总额 |
 | Export | Send to the accounts system | Eksport | 导出 |

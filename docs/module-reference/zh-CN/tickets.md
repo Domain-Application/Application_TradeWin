@@ -248,7 +248,7 @@ DO No、Date、Despatch ticket、PO number、L/C number、Delivery To（带地�
 
 | 术语 | 英文 | 马来文 | 中文 |
 |---|---|---|---|
-| Ticket | Weighing document | Tiket | 磅单 |
+| Ticket | Weighing document | Tiket | 过磅单 |
 | Public weighing | Weighing service for outsiders | Timbang awam | 公众过磅 |
 | Print counter | How many times a ticket was printed | Kiraan cetak | 打印次数 |
 | Party grading | The other party's own product figures | Penggredan pihak | 对方等级 |

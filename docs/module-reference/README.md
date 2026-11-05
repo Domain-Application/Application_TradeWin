@@ -193,7 +193,7 @@ Besides the level, each user can be blocked from menu items (or limited to view 
 | Term | English | Malay | Chinese |
 |---|---|---|---|
 | Weighbridge | Truck scale | Jambatan timbang | 地磅 |
-| Ticket | Weighing document | Tiket | 磅单 |
+| Ticket | Weighing document | Tiket | 过磅单 |
 | Receiving | Goods bought in | Terimaan | 收货 |
 | Despatch | Goods sold out | Penghantaran | 发货 |
 | Public weighing | Weighing service for outsiders | Timbang awam | 公众过磅 |

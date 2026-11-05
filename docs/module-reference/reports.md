@@ -197,7 +197,7 @@ The report window and the Crystal preview show their own messages, which are not
 |---|---|---|---|
 | Report | Printed or previewed summary | Laporan | 报表 |
 | Summary / detail | Totals only / every ticket | Ringkasan / butiran | 汇总 / 明细 |
-| Unbilled ticket | Ticket not on any invoice | Tiket belum bil | 未开发票磅单 |
+| Unbilled ticket | Ticket not on any invoice | Tiket belum bil | 未开发票过磅单 |
 | File change report | Audit of changed fields | Laporan perubahan | 修改记录 |
 | Party | The other company | Pihak | 对方 |
 | Stock card | Movement list of one product | Kad stok | 库存卡 |
